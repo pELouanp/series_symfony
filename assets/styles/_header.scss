@@ -1,0 +1,17 @@
+header {
+  nav {
+    ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      gap: 40px;
+
+      li {
+        a {
+          text-decoration: none;
+          color: black;
+        }
+      }
+    }
+  }
+}
