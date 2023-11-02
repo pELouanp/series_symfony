@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Serie;
+use App\Repository\SerieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,10 +16,11 @@ class SerieController extends AbstractController
     /**
      * @Route("/", name="index")
      */
-    public function index(): Response
+    public function index(SerieRepository $serieRepository): Response
     {
         // TODO: Récupérer la liste des séries en base de données
-        return $this->render('serie/index.html.twig');
+        $serie = $serieRepository->findAll();
+        return $this->render('serie/index.html.twig', ["series" => $serie]);
     }
 
     /**
