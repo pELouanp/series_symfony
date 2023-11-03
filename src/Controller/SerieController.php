@@ -19,17 +19,22 @@ class SerieController extends AbstractController
     public function index(SerieRepository $serieRepository): Response
     {
         // TODO: Récupérer la liste des séries en base de données
-        $serie = $serieRepository->findAll();
+        // $serie = $serieRepository->findBy([], ['popularity' => 'DESC', 'vote' => 'DESC'], 30);
+        $serie = $serieRepository->findBest();
         return $this->render('serie/index.html.twig', ["series" => $serie]);
     }
 
     /**
      * @Route("/{id}", name="show", requirements={"id"="\d+"})
      */
-    public function show(int $id): Response
+    public function show(Serie $serie): Response
     {
+        if ($serie === null) {
+            throw $this->createNotFoundException("Cette série n'existe pas !");
+        }
+
         // TODO: Récupérer en base de données la série ayant l'id $id
-        return $this->render('serie/show.html.twig', ['id' => $id]);
+        return $this->render('serie/show.html.twig', ['serie' => $serie]);
     }
 
     /**
