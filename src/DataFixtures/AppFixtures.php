@@ -9,6 +9,7 @@ use Symfony\Component\Finder\Finder;
 
 class AppFixtures extends Fixture
 {
+
     private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -21,6 +22,7 @@ class AppFixtures extends Fixture
         $finder = new Finder();
         $finder->in("data");
         $finder->files();
+
         foreach ($finder as $file) {
             $sql = $file->getContents();
             $this->entityManager->getConnection()->executeQuery($sql);

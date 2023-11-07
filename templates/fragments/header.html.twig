@@ -1,9 +1,19 @@
 <header>
+    <img src="{{ asset('images/logo.svg') }}" alt="Bucket List">
     <nav>
         <ul>
-            <li><a href="{{ path('homepage') }}">Accueil</a></li>
-            <li><a href="{{ path('serie_index') }}">Séries</a></li>
-            <li><a href="{{ path('serie_new') }}">Ajouter</a></li>
+            <li>
+                <a href="{{ path('homepage') }}">Accueil</a>
+            </li>
+            <li>
+                <a href="{{ path('serie_index') }}">Séries</a>
+            </li>
+            <li>
+                <a href="{{ path('serie_new') }}">Ajouter série</a>
+            </li>
+            <li>
+                <a href="{{ path('season_new') }}">Ajouter saison</a>
+            </li>
         </ul>
     </nav>
 </header>

@@ -33,7 +33,7 @@ class Serie
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Assert\Choice(choices={"Cancelled","Returning","Ended"})
+     * @Assert\Choice(choices={"Cancelled", "Returning", "Ended"})
      */
     private $status;
 
@@ -288,5 +288,10 @@ class Serie
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

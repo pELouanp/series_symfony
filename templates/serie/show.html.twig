@@ -3,24 +3,41 @@
 {% block title %}{{ serie.name }} - {{ parent() }}{% endblock %}
 
 {% block body %}
-    <h1>{{ serie.name }}</h1>
-    <p>{{ serie.vote }}</p>
-    <p>{{ serie.overview }}</p>
+    <div class="serie-details">
+        <header style="background-image: url('{{ asset('images/backdrops/' ~ serie.backdrop) }}')">
+            <h1>{{ serie.name }}</h1>
+            <ul class="serie-infos">
+                <li><span class="vote">{{ serie.vote }}</li>
+                <li><span class="popularity">{{ serie.popularity }}</span></li>
+                <li><span class="status">{{ serie.status }}</span></li>
+                <li><span class="firstAirDate">{{ serie.firstAirDate|date('d/m/Y') }}</span></li>
+                {% if serie.lastAirDate %}
+                    <li><span class="lastAirDate">{{ serie.lastAirDate|date('d/m/Y') }}</span></li>
+                {% endif %}
+            </ul>
+            <ul class="genres">
+                {% for genre in serie.genres|split(' / ') %}
+                    <li><span class="genre">{{ genre }}</span></li>
+                {% endfor %}
+            </ul>
+        </header>
+        <p>{{ serie.overview }}</p>
 
-    <section>
-        {% for season in serie.seasons %}
-            <article>
-                <img src="{{ asset('img/posters/seasons/' ~ season.poster) }}" alt="{{ season.number }}">
-                <div>
-                    <h4>Saison {{ season.number }}</h4>
-                    {% if season.overview %}
-                        <p>{{ season.overview }}</p>
-                    {% endif %}
-                </div>
-            </article>
-        {% endfor %}
-    </section>
+        <a href="{{ path('serie_delete', {'id': serie.id}) }}">Supprimer</a>
 
+        <section class="serie-seasons">
+            {% for season in serie.seasons %}
+                <article>
+                    <img src="{{ asset('images/posters/seasons/' ~ season.poster) }}" alt="{{ season.number }}">
+                    <div>
+                        <h4>Saison {{ season.number }}</h4>
+                        {% if season.overview %}
+                            <p>{{ season.overview|slice(0, 100) }}</p>
+                        {% endif %}
+                    </div>
+                </article>
+            {% endfor %}
+        </section>
+
+    </div>
 {% endblock %}
-
-

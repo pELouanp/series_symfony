@@ -1,15 +1,18 @@
 header {
+  img {
+    height: 70px;
+  }
+
   nav {
     ul {
       display: flex;
-      list-style: none;
+      gap: 1rem;
       padding: 0;
-      gap: 40px;
+      list-style-type: none;
 
       li {
         a {
           text-decoration: none;
-          color: black;
         }
       }
     }

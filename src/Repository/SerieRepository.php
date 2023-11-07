@@ -41,24 +41,27 @@ class SerieRepository extends ServiceEntityRepository
     }
 
     /**
-     * Rechercher les meilleurs séries en base de données
+     * Rechercher les meilleures séries en base de données
      * @return Serie[]
      */
-    public function findBest(): Paginator
-    {
-        /*     $em = $this->getEntityManager();
-             $dql = "
-             SELECT s
-             FROM App\Entity\Serie s
-             WHERE s.popularity > 100
-             AND s.vote > 8
-             ORDER BY s.popularity DESC
-             ";
-             $query = $em->createQuery($dql);
-             $query->setMaxResults(30);
-             $results = $query->getResult();*/
+    public function findBest(): Paginator {
+        /*
+        $em = $this->getEntityManager();
+
+        $dql = "
+            SELECT s
+            FROM App\Entity\Serie s
+            WHERE s.popularity > 100
+            AND s.vote > 8
+            ORDER BY s.popularity DESC
+        ";
+        $query = $em->createQuery($dql);
+        $query->setMaxResults(30);
+        $results = $query->getResult();
+        */
 
         $qb = $this->createQueryBuilder('s');
+
         $qb->leftJoin('s.seasons', 'season')
             ->addSelect('season')
             ->where('s.popularity > 100')
@@ -67,6 +70,7 @@ class SerieRepository extends ServiceEntityRepository
 
         $query = $qb->getQuery();
         $query->setMaxResults(30);
+
         $results = new Paginator($query);
 
         return $results;
@@ -96,5 +100,4 @@ class SerieRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
-
 }
